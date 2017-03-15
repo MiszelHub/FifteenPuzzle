@@ -7,11 +7,19 @@
   <version>1.0-SNAPSHOT</version>
   <name>Fifteenpuzzle</name>
   <url>http://maven.apache.org</url>
+  <developers>
+    <developer>
+      <name>Marcin Lenarczyk</name>
+    </developer>
+    <developer>
+      <name>Michał Andrzejczak</name>
+    </developer>
+  </developers>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
