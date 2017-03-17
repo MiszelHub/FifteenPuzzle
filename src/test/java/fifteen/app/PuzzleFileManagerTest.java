@@ -45,7 +45,7 @@ public class PuzzleFileManagerTest {
                 .containsSequence((byte)2,(byte)2,(byte)1,(byte)2,(byte)3,(byte)0);
     }
     private void createFileContainingMatrix2x2(String fileName) throws IOException {
-        List<String> lines = Arrays.asList("2","2","1 2", "3 0");
+        List<String> lines = Arrays.asList("2 2","1 2", "3 0");
         Path file = Paths.get(fileName);
         Files.write(file, lines, Charset.forName("UTF-8"));
     }
