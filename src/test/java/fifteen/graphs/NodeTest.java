@@ -16,26 +16,37 @@ public class NodeTest {
     private final static Byte [] FILE_CONTENTS = {2,2,2,3,4,0};
     private final static Byte [] nodeContents = {2,3,4,0};
 
-    private final static ArrayList<Byte> NODE = new ArrayList<Byte>(Arrays.asList(nodeContents));
+    private final static Byte [][] NODE = {{2,3},{4,0}};
 
-    Node puzzleelement;
+    Node puzzleElement;
 
     @Before
     public void setUp(){
-        puzzleelement = new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS)));
+        puzzleElement = new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS)));
     }
 
     @Test
     public void getNodeValue() {
-        puzzleelement.getValue();
+        puzzleElement.getNodeContents();
 
-        assertThat(puzzleelement.getValue()).isEqualTo(NODE);
+        assertThat(puzzleElement.getNodeContents()).isEqualTo(NODE);
     }
 
     @Test
     public void areTwoNodesEqual() {
         Node anotherElement = new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS)));
 
-        assertThat(puzzleelement).isEqualTo(anotherElement);
+        assertThat(puzzleElement).isEqualTo(anotherElement);
     }
+
+    @Test
+    public void CreateCloneOfNode() {
+        Node newNode = new PuzzleNode(puzzleElement);
+
+        assertThat(newNode)
+                .isNotNull()
+                .isEqualTo(puzzleElement)
+                .isEqualToComparingFieldByField(puzzleElement);
+    }
+
 }
