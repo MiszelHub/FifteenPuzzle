@@ -39,7 +39,7 @@ public class PuzzleNode {
         width = fileContents.get(1);
 
         fileContents.remove(0);
-        fileContents.remove(1);
+        fileContents.remove(0);
 
         nodeContents = new byte[height][width];
 
