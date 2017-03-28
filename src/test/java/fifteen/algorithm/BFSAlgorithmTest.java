@@ -10,13 +10,15 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 /**
  * Created by Marcinn on 2017-03-27.
  */
 public class BFSAlgorithmTest {
 
     private final static Byte [] FILE_CONTENTS = {2,2,1,2,0,3};
-    private final static PuzzleNode EXPECTED_SOLUTION = new PuzzleNode(new ArrayList<Byte>(Arrays.asList(new Byte[]{2,2,1,2,3,0})));
+    private final static PuzzleNode EXPECTED_SOLUTION =
+            new PuzzleNode(new ArrayList<Byte>(Arrays.asList(new Byte[]{2,2,1,2,3,0})));
     private BFSAlgorithm algorithm;
     private Directions[] directions = {Directions.Down, Directions.Left, Directions.Up, Directions.Right};
 

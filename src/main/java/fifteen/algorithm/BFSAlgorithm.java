@@ -3,6 +3,7 @@ package fifteen.algorithm;
 import fifteen.graphs.Directions;
 import fifteen.graphs.PuzzleNode;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -45,7 +46,7 @@ public class BFSAlgorithm implements Algorithm{
 
         HashSet<PuzzleNode> visitedNodes = new HashSet<>();
         openNodes.add(rootNode);
-        visitedNodes.add(rootNode);
+
         PuzzleNode solution = null;
 
 
@@ -61,12 +62,15 @@ public class BFSAlgorithm implements Algorithm{
             visitedNodes.add(currentNode);
             for(PuzzleNode neighbour : currentNode.getNeighbours(directions))
             {
-                if(!visitedNodes.contains(neighbour))
+                System.out.println(neighbour.toString());
+                System.out.println();
+                if(!(visitedNodes.contains(neighbour) && openNodes.contains(neighbour)))
                 {
                     openNodes.add(neighbour);
                 }
 
             }
+        System.out.println("------------------------------------");
         }
 
         return solution;
