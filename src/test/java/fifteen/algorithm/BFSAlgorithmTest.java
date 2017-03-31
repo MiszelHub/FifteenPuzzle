@@ -16,9 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class BFSAlgorithmTest {
 
-    private final static Byte [] FILE_CONTENTS = {2,2,1,2,0,3};
+    private final static Byte [] FILE_CONTENTS = {4,4,1,2,3,4,5,10,6,8,9,0,7,12,13,14,11,15};
     private final static PuzzleNode EXPECTED_SOLUTION =
-            new PuzzleNode(new ArrayList<Byte>(Arrays.asList(new Byte[]{2,2,1,2,3,0})));
+            new PuzzleNode(new ArrayList<Byte>(Arrays.asList(new Byte[]{4,4,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0})));
     private BFSAlgorithm algorithm;
     private Directions[] directions = {Directions.Down, Directions.Left, Directions.Up, Directions.Right};
 
