@@ -50,6 +50,11 @@ public class DFSAlgorithm extends Algorithm
                 currentDepth--;
             }else{
                 PuzzleNode currentNode = getLastElementOfHashSet(openNodes);
+
+                if(currentNode.equals(expectedSolution)) {
+                    return currentNode;
+                }
+                boolean goBack=true;
                 for (PuzzleNode neighbour : currentNode.getNeighbours(directions)){
                     if (!visitedNodes.contains(neighbour)){
                         if(neighbour.equals(expectedSolution)){
@@ -59,7 +64,13 @@ public class DFSAlgorithm extends Algorithm
                         visitedNodes.add(neighbour);
                         openNodes.add(neighbour);
                         currentDepth++;
+                        goBack = false;
+                        break;
                     }
+                }
+                if(goBack){
+                    openNodes.remove(getLastElementOfHashSet(openNodes));
+                    currentDepth--;
                 }
             }
         }
