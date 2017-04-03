@@ -11,8 +11,12 @@ public class PuzzleNode {
     private byte [][] nodeContents;
     private byte height;
     private byte width;
-    private BlankPosition blankPosition;
+    private Position position;
     private PuzzleNode parent;
+    private int totalDistance;
+    private int currentDistance;
+    private int previousDistance;
+
 
 
     public PuzzleNode(Object node)
@@ -24,9 +28,9 @@ public class PuzzleNode {
             this.width = ((PuzzleNode) node).width;
             this.height = ((PuzzleNode) node).height;
             this.nodeContents = deepCopy(((PuzzleNode) node).nodeContents);
-            this.blankPosition = new BlankPosition();
-            this.blankPosition.column = ((PuzzleNode) node).blankPosition.column;
-            this.blankPosition.row = ((PuzzleNode) node).blankPosition.row;
+            this.position = new Position();
+            this.position.column = ((PuzzleNode) node).position.column;
+            this.position.row = ((PuzzleNode) node).position.row;
         }
     }
     byte[][] deepCopy(byte[][] matrix) {
@@ -34,7 +38,7 @@ public class PuzzleNode {
     }
 
     public PuzzleNode(ArrayList<Byte> fileContents) {
-       blankPosition = new BlankPosition();
+       position = new Position();
         height = fileContents.get(0);
         width = fileContents.get(1);
 
@@ -56,8 +60,8 @@ public class PuzzleNode {
                 nodeContents[i][j] = fileContents.get(k);
                 if(nodeContents[i][j] == 0)
                 {
-                    blankPosition.column =(byte) j;
-                    blankPosition.row =(byte) i;
+                    position.column =(byte) j;
+                    position.row =(byte) i;
                 }
                 k++;
             }
@@ -86,8 +90,8 @@ public class PuzzleNode {
         return parent;
     }
 
-    public BlankPosition getBlankPosition() {
-        return blankPosition;
+    public Position getPosition() {
+        return position;
     }
     public ArrayList<PuzzleNode> getNeighbours(Directions [] directions)
     {
@@ -112,31 +116,31 @@ public class PuzzleNode {
 
         if(direction == Directions.Down)
         {
-            node.nodeContents[blankPosition.row][blankPosition.column] = node.nodeContents[blankPosition.row + 1][blankPosition.column];
-            node.nodeContents[blankPosition.row + 1][blankPosition.column] = 0;
+            node.nodeContents[position.row][position.column] = node.nodeContents[position.row + 1][position.column];
+            node.nodeContents[position.row + 1][position.column] = 0;
 
-            node.blankPosition.row = (byte) (blankPosition.row + 1);
+            node.position.row = (byte) (position.row + 1);
         }
         else if(direction == Directions.Up)
         {
-            node.nodeContents[blankPosition.row][blankPosition.column] = node.nodeContents[blankPosition.row - 1][blankPosition.column];
-            node.nodeContents[blankPosition.row - 1][blankPosition.column] = 0;
+            node.nodeContents[position.row][position.column] = node.nodeContents[position.row - 1][position.column];
+            node.nodeContents[position.row - 1][position.column] = 0;
 
-            node.blankPosition.row = (byte) (blankPosition.row - 1);
+            node.position.row = (byte) (position.row - 1);
         }
         else if(direction == Directions.Left)
         {
-            node.nodeContents[blankPosition.row][blankPosition.column] = node.nodeContents[blankPosition.row][blankPosition.column - 1];
-            node.nodeContents[blankPosition.row][blankPosition.column - 1] = 0;
+            node.nodeContents[position.row][position.column] = node.nodeContents[position.row][position.column - 1];
+            node.nodeContents[position.row][position.column - 1] = 0;
 
-            node.blankPosition.column = (byte) (blankPosition.column - 1);
+            node.position.column = (byte) (position.column - 1);
         }
         else if(direction == Directions.Right)
         {
-            node.nodeContents[blankPosition.row][blankPosition.column] = node.nodeContents[blankPosition.row][blankPosition.column + 1];
-            node.nodeContents[blankPosition.row][blankPosition.column + 1] = 0;
+            node.nodeContents[position.row][position.column] = node.nodeContents[position.row][position.column + 1];
+            node.nodeContents[position.row][position.column + 1] = 0;
 
-            node.blankPosition.column = (byte) (blankPosition.column + 1);
+            node.position.column = (byte) (position.column + 1);
         }
         node.parent = this;
 
@@ -153,7 +157,7 @@ public class PuzzleNode {
         if (height != that.height) return false;
         if (width != that.width) return false;
         if (!Arrays.deepEquals(nodeContents, that.nodeContents)) return false;
-        return blankPosition.equals(that.blankPosition);
+        return position.equals(that.position);
     }
 
     @Override
@@ -161,7 +165,7 @@ public class PuzzleNode {
         int result = Arrays.deepHashCode(nodeContents);
         result = 31 * result + (int) height;
         result = 31 * result + (int) width;
-        result = 31 * result + blankPosition.hashCode();
+        result = 31 * result + position.hashCode();
         return result;
     }
 
@@ -178,5 +182,34 @@ public class PuzzleNode {
             stb.append("\n");
         }
         return stb.toString();
+    }
+
+    public int getTotalDistance() {
+        return totalDistance;
+    }
+
+    public void setTotalDistance(int totalDistance) {
+        this.totalDistance = totalDistance;
+    }
+
+    public int getCurrentDistance() {
+        return currentDistance;
+    }
+
+    public void setCurrentDistance(int currentDistance) {
+        this.currentDistance = currentDistance;
+    }
+
+    public int getPreviousDistance() {
+        return previousDistance;
+    }
+
+    public void setPreviousDistance(int previousDistance) {
+        this.previousDistance = previousDistance;
+    }
+
+    public void SumDistance()
+    {
+        totalDistance = previousDistance + currentDistance;
     }
 }

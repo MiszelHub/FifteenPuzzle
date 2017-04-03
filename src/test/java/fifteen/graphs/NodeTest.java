@@ -1,7 +1,6 @@
 package fifteen.graphs;
 
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,10 +52,10 @@ public class NodeTest {
     @Test
     public void SetBlankPosition() throws Exception {
 
-        BlankPosition pos2 = new BlankPosition();
+        Position pos2 = new Position();
         pos2.column = 1;
         pos2.row =1;
-        assertThat(puzzleElement.getBlankPosition()).isEqualTo(pos2);
+        assertThat(puzzleElement.getPosition()).isEqualTo(pos2);
     }
 
     @Test

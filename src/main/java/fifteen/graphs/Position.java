@@ -3,7 +3,7 @@ package fifteen.graphs;
 /**
  * Created by user on 22.03.2017.
  */
-public class BlankPosition {
+public class Position {
     public byte column;
     public byte row;
 
@@ -12,7 +12,7 @@ public class BlankPosition {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BlankPosition that = (BlankPosition) o;
+        Position that = (Position) o;
 
         if (column != that.column) return false;
         return row == that.row;
@@ -27,7 +27,7 @@ public class BlankPosition {
 
     @Override
     public String toString() {
-        return "BlankPosition{" +
+        return "Position{" +
                 "column=" + column +
                 ", row=" + row +
                 '}';
