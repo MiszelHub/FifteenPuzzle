@@ -1,24 +1,23 @@
 package fifteen.algorithm;
 
 import fifteen.graphs.Directions;
-import fifteen.graphs.Node;
 import fifteen.graphs.PuzzleNode;
+import fifteen.graphs.Statistics;
 
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 
 public class DFSAlgorithm extends Algorithm
 {
     private byte maximumDepth;
+    Statistics statistics;
 
     public DFSAlgorithm(PuzzleNode rootNode, Directions[] directions, byte maximumDepth)
     {
         super(rootNode,directions);
         this.maximumDepth = maximumDepth;
-
+        statistics = new Statistics();
     }
 
 
@@ -34,26 +33,35 @@ public class DFSAlgorithm extends Algorithm
 
         while (!nodesToProcess.isEmpty())
         {
+            statistics.startSolvingTime();
+            if(currentDepth > statistics.getMaxDepth())
+                statistics.setMaxDepth(currentDepth);
 
             if(this.maximumDepth < currentDepth)
             {
                 nodesToProcess.remove(getLastElementOfHashSet(nodesToProcess));
                 currentDepth--;
-            }else{
+                statistics.increaseProcessedNodes();
+            }
+            else
+            {
                 PuzzleNode currentNode = getLastElementOfHashSet(nodesToProcess);
 
                 if(currentNode.equals(expectedSolution)) {
+                    statistics.stopSolvingTime();
                     return currentNode;
                 }
                 boolean goBack=true;
                 for (PuzzleNode neighbour : currentNode.getNeighbours(directions)){
                     if (!visitedNodes.contains(neighbour)){
                         if(neighbour.equals(expectedSolution)){
+                            statistics.stopSolvingTime();
                             return neighbour;
 
                         }
                         visitedNodes.add(neighbour);
                         nodesToProcess.add(neighbour);
+                        statistics.increaseVisitedNodes();
                         currentDepth++;
                         goBack = false;
                         break;
@@ -65,6 +73,8 @@ public class DFSAlgorithm extends Algorithm
                 }
             }
         }
+
+        statistics.stopSolvingTime();
         return solution;
     }
 
