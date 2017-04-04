@@ -11,9 +11,9 @@ public class PuzzleNode {
     private byte width;
     private Position position;
     private PuzzleNode parent;
-    private int totalDistance;
-    private int currentDistance;
-    private int previousDistance;
+    private int totalHeuristicValue;
+    private int currentHeuristicValue;
+    private int previousHeuristicValue;
 
 
 
@@ -182,32 +182,32 @@ public class PuzzleNode {
         return stb.toString();
     }
 
-    public int getTotalDistance() {
-        return totalDistance;
+    public int getTotalHeuristicValue() {
+        return totalHeuristicValue;
     }
 
-    public void setTotalDistance(int totalDistance) {
-        this.totalDistance = totalDistance;
+    public void setTotalHeuristicValue(int totalHeuristicValue) {
+        this.totalHeuristicValue = totalHeuristicValue;
     }
 
-    public int getCurrentDistance() {
-        return currentDistance;
+    public int getCurrentHeuristicValue() {
+        return currentHeuristicValue;
     }
 
-    public void setCurrentDistance(int currentDistance) {
-        this.currentDistance = currentDistance;
+    public void setCurrentHeuristicValue(int currentHeuristicValue) {
+        this.currentHeuristicValue = currentHeuristicValue;
     }
 
-    public int getPreviousDistance() {
-        return previousDistance;
+    public int getPreviousHeuristicValue() {
+        return previousHeuristicValue;
     }
 
-    public void setPreviousDistance(int previousDistance) {
-        this.previousDistance = previousDistance;
+    public void setPreviousHeuristicValue(int previousHeuristicValue) {
+        this.previousHeuristicValue = previousHeuristicValue;
     }
 
     public void SumDistance()
     {
-        totalDistance = previousDistance + currentDistance;
+        totalHeuristicValue = previousHeuristicValue + currentHeuristicValue;
     }
 }

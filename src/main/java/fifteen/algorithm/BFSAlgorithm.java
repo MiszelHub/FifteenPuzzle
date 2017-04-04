@@ -19,16 +19,16 @@ public class BFSAlgorithm extends Algorithm{
     @Override
     public PuzzleNode solvePuzzle() {
 
-        Queue<PuzzleNode> openNodes = new LinkedList<>();
+        Queue<PuzzleNode> nodesToProcess = new LinkedList<>();
         HashSet<PuzzleNode> visitedNodes = new HashSet<>();
-        openNodes.add(rootNode);
+        nodesToProcess.add(rootNode);
 
         PuzzleNode solution = null;
 
 
-        while(!openNodes.isEmpty())
+        while(!nodesToProcess.isEmpty())
         {
-            PuzzleNode currentNode = openNodes.remove();
+            PuzzleNode currentNode = nodesToProcess.remove();
 
             if(currentNode.equals(expectedSolution))
             {
@@ -40,9 +40,9 @@ public class BFSAlgorithm extends Algorithm{
             {
                 System.out.println(neighbour.toString());
                 System.out.println();
-                if(!(visitedNodes.contains(neighbour) && openNodes.contains(neighbour)))
+                if(!(visitedNodes.contains(neighbour) && nodesToProcess.contains(neighbour)))
                 {
-                    openNodes.add(neighbour);
+                    nodesToProcess.add(neighbour);
                 }
 
             }

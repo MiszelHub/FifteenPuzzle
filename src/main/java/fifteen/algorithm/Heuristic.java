@@ -7,9 +7,9 @@ import fifteen.graphs.PuzzleNode;
 public abstract class Heuristic {
     private PuzzleNode expectedSolution;
 
-    public abstract int getDistance(PuzzleNode node);
+    public abstract int getHeuristicsValue(PuzzleNode node);
 
-    public Position getCorrectPosition(byte puzzleElement){
+    public Position getCorrectElementPosition(byte puzzleElement){
         Position correctPosition = new Position();
         for (int i = 0; i < expectedSolution.getHeight(); i++) {
             for (int j = 0; j < expectedSolution.getWidth(); j++) {

@@ -26,21 +26,21 @@ public class DFSAlgorithm extends Algorithm
     public PuzzleNode solvePuzzle()
     {
         HashSet<PuzzleNode> visitedNodes = new HashSet<>();
-        LinkedHashSet<PuzzleNode> openNodes = new LinkedHashSet<>();
+        LinkedHashSet<PuzzleNode> nodesToProcess = new LinkedHashSet<>();
 
-        openNodes.add(rootNode);
+        nodesToProcess.add(rootNode);
         PuzzleNode solution = null;
         byte currentDepth = 0;
 
-        while (!openNodes.isEmpty())
+        while (!nodesToProcess.isEmpty())
         {
 
             if(this.maximumDepth < currentDepth)
             {
-                openNodes.remove(getLastElementOfHashSet(openNodes));
+                nodesToProcess.remove(getLastElementOfHashSet(nodesToProcess));
                 currentDepth--;
             }else{
-                PuzzleNode currentNode = getLastElementOfHashSet(openNodes);
+                PuzzleNode currentNode = getLastElementOfHashSet(nodesToProcess);
 
                 if(currentNode.equals(expectedSolution)) {
                     return currentNode;
@@ -53,14 +53,14 @@ public class DFSAlgorithm extends Algorithm
 
                         }
                         visitedNodes.add(neighbour);
-                        openNodes.add(neighbour);
+                        nodesToProcess.add(neighbour);
                         currentDepth++;
                         goBack = false;
                         break;
                     }
                 }
                 if(goBack){
-                    openNodes.remove(getLastElementOfHashSet(openNodes));
+                    nodesToProcess.remove(getLastElementOfHashSet(nodesToProcess));
                     currentDepth--;
                 }
             }

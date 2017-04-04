@@ -1,10 +1,8 @@
 package fifteen.algorithm;
 
 import fifteen.graphs.Directions;
-import fifteen.graphs.Position;
 import fifteen.graphs.PuzzleNode;
 import fifteen.graphs.PuzzleNodeComparator;
-import javafx.scene.layout.Priority;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,16 +26,16 @@ public class AStarAlgorithm extends Algorithm
     @Override
     PuzzleNode solvePuzzle() {
 
-        PriorityQueue<PuzzleNode> openNodes = new PriorityQueue<>(new PuzzleNodeComparator());
+        PriorityQueue<PuzzleNode> nodesToProcess = new PriorityQueue<>(new PuzzleNodeComparator());
         HashSet<PuzzleNode> visitedNodes = new HashSet<>();
         HashMap<PuzzleNode,PuzzleNode> nodeMap = new HashMap<>();
 
-        openNodes.add(rootNode);
+        nodesToProcess.add(rootNode);
         nodeMap.put(rootNode, rootNode);
 
-        while (!openNodes.isEmpty())
+        while (!nodesToProcess.isEmpty())
         {
-            PuzzleNode currentNode = openNodes.poll();
+            PuzzleNode currentNode = nodesToProcess.poll();
             nodeMap.remove(currentNode);
             if(currentNode.equals(expectedSolution))
             {
@@ -48,13 +46,13 @@ public class AStarAlgorithm extends Algorithm
             {
                 if(!visitedNodes.contains(neighbour))
                 {
-                    int distance = currentNode.getPreviousDistance()+1;
-                    if(!openNodes.contains(neighbour) || distance < nodeMap.get(neighbour).getPreviousDistance())
+                    int distance = currentNode.getPreviousHeuristicValue()+1;
+                    if(!nodesToProcess.contains(neighbour) || distance < nodeMap.get(neighbour).getPreviousHeuristicValue())
                     {
-                        neighbour.setPreviousDistance(distance);
-                        neighbour.setCurrentDistance(heuristic.getDistance(neighbour));
+                        neighbour.setPreviousHeuristicValue(distance);
+                        neighbour.setCurrentHeuristicValue(heuristic.getHeuristicsValue(neighbour));
                         neighbour.SumDistance();
-                        openNodes.add(neighbour);
+                        nodesToProcess.add(neighbour);
                         if(!nodeMap.containsKey(neighbour))
                         {
                             nodeMap.put(neighbour, neighbour);
