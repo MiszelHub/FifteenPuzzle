@@ -3,9 +3,7 @@ package fifteen.graphs;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by user on 17.03.2017.
- */
+
 public class PuzzleNode {
 
     private byte [][] nodeContents;

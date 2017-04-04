@@ -1,8 +1,6 @@
 package fifteen.graphs;
 
-/**
- * Created by user on 22.03.2017.
- */
+
 public class Position {
     public byte column;
     public byte row;

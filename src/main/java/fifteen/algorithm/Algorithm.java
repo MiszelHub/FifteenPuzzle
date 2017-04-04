@@ -1,13 +1,22 @@
 package fifteen.algorithm;
 
+import fifteen.graphs.Directions;
 import fifteen.graphs.PuzzleNode;
 
 import java.util.ArrayList;
 
-/**
- * Created by Marcinn on 2017-03-27.
- */
+
 public abstract class Algorithm {
+
+    protected PuzzleNode expectedSolution;
+    protected PuzzleNode rootNode;
+    protected Directions [] directions;
+
+    public Algorithm(PuzzleNode rootNode, Directions[] directions) {
+        this.rootNode = rootNode;
+        this.directions = directions;
+        expectedSolution = getSolution(rootNode.getWidth(),rootNode.getHeight());
+    }
 
     public PuzzleNode getSolution(byte width, byte height) {
         ArrayList<Byte> node = new ArrayList<>();

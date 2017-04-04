@@ -3,9 +3,7 @@ package fifteen.algorithm;
 import fifteen.graphs.Position;
 import fifteen.graphs.PuzzleNode;
 
-/**
- * Created by Marcinn on 2017-04-02.
- */
+
 public abstract class Heuristic {
     private PuzzleNode expectedSolution;
 

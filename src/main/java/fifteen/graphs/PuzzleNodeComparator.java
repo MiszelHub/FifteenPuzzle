@@ -2,9 +2,7 @@ package fifteen.graphs;
 
 import java.util.Comparator;
 
-/**
- * Created by Marcinn on 2017-04-03.
- */
+
 public class PuzzleNodeComparator implements Comparator<PuzzleNode> {
 
     @Override

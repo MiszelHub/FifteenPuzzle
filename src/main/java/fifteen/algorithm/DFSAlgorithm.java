@@ -9,25 +9,16 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
-/**
- * Created by Marcinn on 2017-03-31.
- */
+
 public class DFSAlgorithm extends Algorithm
 {
-    private PuzzleNode rootNode;
-
-    private PuzzleNode expectedSolution;
-
-    private Directions[] directions;
-
     private byte maximumDepth;
 
     public DFSAlgorithm(PuzzleNode rootNode, Directions[] directions, byte maximumDepth)
     {
+        super(rootNode,directions);
         this.maximumDepth = maximumDepth;
-        this.rootNode = rootNode;
-        this.directions = directions;
-        expectedSolution = getSolution(rootNode.getWidth(),rootNode.getHeight());
+
     }
 
 

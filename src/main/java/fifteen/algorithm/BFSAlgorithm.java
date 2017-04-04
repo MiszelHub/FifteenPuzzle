@@ -7,21 +7,13 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.*;
 
-/**
- * Created by Marcinn on 2017-03-27.
- */
+
 public class BFSAlgorithm extends Algorithm{
 
-    private PuzzleNode rootNode;
-
-    private PuzzleNode expectedSolution;
-
-    private Directions[] directions;
 
     public BFSAlgorithm(PuzzleNode rootNode, Directions[] directions) {
-        this.rootNode = rootNode;
-        this.directions = directions;
-        expectedSolution = getSolution(rootNode.getWidth(),rootNode.getHeight());
+        super(rootNode,directions);
+
     }
 
     @Override

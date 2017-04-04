@@ -28,7 +28,7 @@ public class AStarAlgorithmTest
     @Before
     public void setUp()
     {
-        algorithm = new AStarAlgorithm(new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS))), new ManhatanHeuristic());
+        algorithm = new AStarAlgorithm(new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS))), directions,new ManhatanHeuristic());
 
     }
 
@@ -36,14 +36,14 @@ public class AStarAlgorithmTest
     @Parameters(method = "getPuzzles")
     public void solvePuzzleManhatanMetric(ArrayList<Byte> fileContents) throws Exception {
         PuzzleNode node = new PuzzleNode(fileContents);
-        algorithm = new AStarAlgorithm(node, new ManhatanHeuristic());
+        algorithm = new AStarAlgorithm(node, directions ,new ManhatanHeuristic());
         assertThat(algorithm.solvePuzzle()).isEqualTo(EXPECTED_SOLUTION);
     }
     @Test
     @Parameters(method = "getPuzzles")
     public void solvePuzzleHammingMetric(ArrayList<Byte> fileContents) throws Exception {
         PuzzleNode node = new PuzzleNode(fileContents);
-        algorithm = new AStarAlgorithm(node, new HammingHeuristic());
+        algorithm = new AStarAlgorithm(node, directions,new HammingHeuristic());
         assertThat(algorithm.solvePuzzle()).isEqualTo(EXPECTED_SOLUTION);
     }
 
@@ -53,7 +53,8 @@ public class AStarAlgorithmTest
                 $(new ArrayList<Byte>(Arrays.asList(new Byte[]{4,4,1,2,3,4,5,10,6,8,9,0,7,12,13,14,11,15}))),
                 $(new ArrayList<Byte>(Arrays.asList(new Byte[]{4, 4,1, 2, 3, 4,9, 5, 6, 7,0, 13, 11, 8,14, 10, 15, 12}))),
                 $(new ArrayList<Byte>(Arrays.asList(new Byte[]{4, 4,0, 1, 2, 4,5, 6, 3, 7,9, 10, 11, 8,13, 14, 15, 12}))),
-                $(new ArrayList<Byte>(Arrays.asList(new Byte[]{4, 4,1, 2, 3, 4,6, 0, 11, 7,5, 9, 10, 8,13, 14, 15, 12})))
+                $(new ArrayList<Byte>(Arrays.asList(new Byte[]{4, 4,1, 2, 3, 4,6, 0, 11, 7,5, 9, 10, 8,13, 14, 15, 12}))),
+                $(new ArrayList<Byte>(Arrays.asList(new Byte[]{4,4,1,6,2,3,5,10,7,4,9,0,11,8,13,14,15,12})))
         );
     }
 }

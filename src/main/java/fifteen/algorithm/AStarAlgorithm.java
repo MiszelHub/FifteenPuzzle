@@ -10,26 +10,19 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
-/**
- * Created by Marcinn on 2017-04-02.
- */
+
 public class AStarAlgorithm extends Algorithm
 {
-    private PuzzleNode rootNode;
-
-    private PuzzleNode expectedSolution;
 
     private Heuristic heuristic;
 
-    private Directions[] directions;
 
-    public AStarAlgorithm(PuzzleNode rootNode, Heuristic heuristic)
+    public AStarAlgorithm(PuzzleNode rootNode, Directions [] directions,Heuristic heuristic)
     {
-        this.rootNode = rootNode;
-        expectedSolution = getSolution(rootNode.getWidth(),rootNode.getHeight());
+        super(rootNode,directions);
+
         this.heuristic = heuristic;
         heuristic.setExpectedSolution(expectedSolution);
-        directions = new Directions[]{Directions.Right, Directions.Down, Directions.Up, Directions.Left};
     }
 
     @Override
