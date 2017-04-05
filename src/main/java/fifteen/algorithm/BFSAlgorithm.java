@@ -55,11 +55,12 @@ public class BFSAlgorithm extends Algorithm{
         System.out.println("------------------------------------");
         }
         statistics.stopSolvingTime();
-
+        statistics.calculatePathLength(solution);
         System.out.println("Solving time: "+statistics.getSolvingTime()+"ms");
         System.out.println("Max depth: "+statistics.getMaxDepth());
         System.out.println("Visited nodes: "+statistics.getVisitedNodes());
         System.out.println("Processed nodes: "+statistics.getProcessedNodes());
+        System.out.println("Path Length: "+statistics.getSolutionLength());
         return solution;
     }
 

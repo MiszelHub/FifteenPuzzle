@@ -1,7 +1,14 @@
 package fifteen.graphs;
 
+import com.google.common.base.Stopwatch;
+
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 
 /**
  * Created by Marcinn on 2017-04-04.
@@ -12,9 +19,11 @@ public class Statistics
     private int processedNodes;
     private List<PuzzleNode> solution;
     private int maxDepth;
-    private long solvingTime;
+    double  solvingTime;
     private Date beforeSolving;
     private Date afterSolving;
+    private Stopwatch stopwatch;
+    private int solutionLength;
 
     public Statistics()
     {
@@ -26,13 +35,17 @@ public class Statistics
 
     public void startSolvingTime()
     {
-        beforeSolving = new Date();
+       // beforeSolving = new Date();
+        stopwatch = Stopwatch.createStarted();
     }
 
     public void stopSolvingTime()
     {
-        afterSolving = new Date();
-        solvingTime = afterSolving.getTime() - beforeSolving.getTime();
+       // afterSolving = new Date();
+        stopwatch.stop();
+        //solvingTime = afterSolving.getTime() - beforeSolving.getTime();
+        solvingTime = (stopwatch.elapsed(TimeUnit.MICROSECONDS))/1000.0;
+        round(solvingTime,3);
     }
 
     public void increaseVisitedNodes()
@@ -55,6 +68,19 @@ public class Statistics
         }
 
         return tempDepth;
+    }
+    public void calculatePathLength(PuzzleNode node){
+        int length =0;
+
+
+        while(node != null){
+            length++;
+            System.out.println(node.toString());
+            node = node.getParent();
+
+
+        }
+        this.solutionLength = length;
     }
 
     public int getVisitedNodes() {
@@ -89,11 +115,15 @@ public class Statistics
         this.maxDepth = maxDepth;
     }
 
-    public long getSolvingTime() {
+    public double getSolvingTime() {
         return solvingTime;
     }
 
-    public void setSolvingTime(long solvingTime) {
+    public void setSolvingTime(double solvingTime) {
         this.solvingTime = solvingTime;
+    }
+
+    public int getSolutionLength() {
+        return solutionLength;
     }
 }

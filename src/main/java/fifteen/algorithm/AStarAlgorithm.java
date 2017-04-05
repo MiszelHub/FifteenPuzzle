@@ -47,6 +47,14 @@ public class AStarAlgorithm extends Algorithm
             if(currentNode.equals(expectedSolution))
             {
                 statistics.stopSolvingTime();
+                System.out.println("------------------------------------");
+
+                statistics.calculatePathLength(currentNode);
+                System.out.println("Solving time: "+statistics.getSolvingTime()+"ms");
+                System.out.println("Max depth: "+statistics.getMaxDepth());
+                System.out.println("Visited nodes: "+statistics.getVisitedNodes());
+                System.out.println("Processed nodes: "+statistics.getProcessedNodes());
+                System.out.println("Path Length: "+statistics.getSolutionLength());
                 return currentNode;
             }
             visitedNodes.add(currentNode);
@@ -76,6 +84,7 @@ public class AStarAlgorithm extends Algorithm
         }
 
         statistics.stopSolvingTime();
+
         return null;
     }
 
