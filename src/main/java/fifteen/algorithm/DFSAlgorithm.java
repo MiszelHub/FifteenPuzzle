@@ -4,6 +4,8 @@ import fifteen.graphs.Directions;
 import fifteen.graphs.PuzzleNode;
 import fifteen.graphs.Statistics;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
@@ -31,46 +33,46 @@ public class DFSAlgorithm extends Algorithm
         PuzzleNode solution = null;
         byte currentDepth = 0;
 
-        while (!nodesToProcess.isEmpty())
-        {
+        while (!nodesToProcess.isEmpty()) {
             statistics.startSolvingTime();
-            if(currentDepth > statistics.getMaxDepth())
+            if (currentDepth > statistics.getMaxDepth())
                 statistics.setMaxDepth(currentDepth);
 
-            if(this.maximumDepth < currentDepth)
-            {
-                nodesToProcess.remove(getLastElementOfHashSet(nodesToProcess));
-                currentDepth--;
-                statistics.increaseProcessedNodes();
+            PuzzleNode currentNode = getLastElementOfHashSet(nodesToProcess);
+
+            nodesToProcess.remove(currentNode);
+
+            if(statistics.calculateMaxDepth(currentNode) == 1)
+                visitedNodes.clear();
+
+            if (currentNode.equals(expectedSolution)) {
+                statistics.stopSolvingTime();
+                return currentNode;
             }
-            else
-            {
-                PuzzleNode currentNode = getLastElementOfHashSet(nodesToProcess);
 
-                if(currentNode.equals(expectedSolution)) {
+            if (statistics.calculateMaxDepth(currentNode) > maximumDepth){
+                continue;
+            }
+
+
+            visitedNodes.add(currentNode);
+            statistics.increaseVisitedNodes();
+
+            boolean goBack = true;
+            ArrayList<PuzzleNode> neighbours = currentNode.getNeighbours(directions);
+            Collections.reverse(neighbours);
+
+            for (PuzzleNode neighbour : neighbours) {
+
+                if (neighbour.equals(expectedSolution)) {
                     statistics.stopSolvingTime();
-                    return currentNode;
+                    return neighbour;
+                } else if (!visitedNodes.contains(neighbour) && !nodesToProcess.contains(neighbour)) {
+                    nodesToProcess.add(neighbour);
+                    statistics.increaseProcessedNodes();
                 }
-                boolean goBack=true;
-                for (PuzzleNode neighbour : currentNode.getNeighbours(directions)){
-                    if (!visitedNodes.contains(neighbour)){
-                        if(neighbour.equals(expectedSolution)){
-                            statistics.stopSolvingTime();
-                            return neighbour;
 
-                        }
-                        visitedNodes.add(neighbour);
-                        nodesToProcess.add(neighbour);
-                        statistics.increaseVisitedNodes();
-                        currentDepth++;
-                        goBack = false;
-                        break;
-                    }
-                }
-                if(goBack){
-                    nodesToProcess.remove(getLastElementOfHashSet(nodesToProcess));
-                    currentDepth--;
-                }
+
             }
         }
 
@@ -82,4 +84,7 @@ public class DFSAlgorithm extends Algorithm
     {
        return openNodes.stream().skip(openNodes.size()-1).findFirst().get();
     }
+
+
+
 }
