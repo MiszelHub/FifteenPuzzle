@@ -34,7 +34,7 @@ public abstract class Algorithm {
 
         return new PuzzleNode(node);
     }
-    abstract PuzzleNode solvePuzzle();
+    public abstract PuzzleNode solvePuzzle();
 
 
 }

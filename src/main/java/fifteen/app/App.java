@@ -1,12 +1,12 @@
 package fifteen.app;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import fifteen.algorithm.*;
 import fifteen.graphs.Directions;
 import fifteen.graphs.PuzzleNode;
 import fifteen.graphs.Statistics;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,12 +25,7 @@ public class App
         Statistics statistics = new Statistics();
         FileManager<ArrayList<Byte>> fileManager = new PuzzleFileManager();
 
-        PuzzleNode initialState = null;
-        try{
-            initialState = new PuzzleNode(fileManager.ReadFromFile(filePath));
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }
+
 
         try
         {
@@ -41,6 +36,12 @@ public class App
         }catch (Exception e)
         {
             e.getMessage();
+        }
+        PuzzleNode initialState = null;
+        try{
+            initialState = new PuzzleNode(fileManager.ReadFromFile(filePath));
+        }catch(IOException e){
+            System.out.println(e.getMessage());
         }
         switch (algorithmName)
         {
@@ -61,6 +62,7 @@ public class App
                 }
                 break;
         }
+        algorithm.solvePuzzle();
 
         StringBuilder solutionFileBuilder = new StringBuilder();
         solutionFileBuilder.append(statistics.getSolutionLength()+"\n");
@@ -74,7 +76,6 @@ public class App
         statisticsFileBuilder.append(statistics.getSolvingTime()+"\n");
 
 
-        filePath = "aaaaaaaaaaaaaaaaaaaaa4x4_01_0001_dfs_ludr.txt";
 
         String statisticsFileName = fileNameBuilder(filePath,"stats");
         String solutionFileName = fileNameBuilder(filePath,"sol");
@@ -84,14 +85,14 @@ public class App
         System.out.println( "Algorithm Name : "+algorithmName);
         System.out.println( "Strategy/Heuristic : "+strategy);
 
+
         try{
-            fileManager.writeFile(statisticsFileName,"Statistics/", solutionFileBuilder.toString());
-            fileManager.writeFile(solutionFileName,"Solutions/",statisticsFileBuilder.toString());
+            fileManager.writeFile(statisticsFileName, statisticsFileBuilder.toString());
+            fileManager.writeFile(solutionFileName,solutionFileBuilder.toString());
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
-
-
+    System.in.read();
     }
 
     public static Directions[] parseDirections(String strategy)
@@ -120,7 +121,7 @@ public class App
         return directions;
     }
     public static String fileNameBuilder(String filePath, String fileSuffix){
-        String fileName = filePath.substring(filePath.length() - 24,filePath.length() - 4);
+        String fileName = filePath.substring(filePath.length() - 16,filePath.length() - 4);
         fileName+="_"+fileSuffix;
 
         return fileName+".txt";

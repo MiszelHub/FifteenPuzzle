@@ -26,7 +26,7 @@ public class AStarAlgorithm extends Algorithm
     }
 
     @Override
-    PuzzleNode solvePuzzle() {
+    public PuzzleNode solvePuzzle() {
 
         statistics.startSolvingTime();
 
