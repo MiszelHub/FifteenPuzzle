@@ -28,4 +28,10 @@ public class PuzzleFileManager implements FileManager<ArrayList<Byte>> {
         return tmpArray;
     }
 
+    @Override
+    public void writeFile(String fileName, String destinationDirectory, String fileContents) throws FileNotFoundException {
+        PrintWriter fileWriter = new PrintWriter(destinationDirectory+fileName);
+        fileWriter.print(fileContents);
+    }
+
 }

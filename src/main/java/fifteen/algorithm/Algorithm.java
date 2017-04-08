@@ -2,6 +2,7 @@ package fifteen.algorithm;
 
 import fifteen.graphs.Directions;
 import fifteen.graphs.PuzzleNode;
+import fifteen.graphs.Statistics;
 
 import java.util.ArrayList;
 
@@ -11,11 +12,13 @@ public abstract class Algorithm {
     protected PuzzleNode expectedSolution;
     protected PuzzleNode rootNode;
     protected Directions [] directions;
+    protected Statistics statistics;
 
-    public Algorithm(PuzzleNode rootNode, Directions[] directions) {
+    public Algorithm(PuzzleNode rootNode, Directions[] directions, Statistics statistics) {
         this.rootNode = rootNode;
         this.directions = directions;
         expectedSolution = getSolution(rootNode.getWidth(),rootNode.getHeight());
+        this.statistics = statistics;
     }
 
     public PuzzleNode getSolution(byte width, byte height) {

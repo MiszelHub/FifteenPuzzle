@@ -2,6 +2,7 @@ package fifteen.algorithm;
 
 import fifteen.graphs.Directions;
 import fifteen.graphs.PuzzleNode;
+import fifteen.graphs.Statistics;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 
@@ -30,7 +31,7 @@ public class DFSTest {
     @Before
     public void setUp()
     {
-        algorithm = new DFSAlgorithm(new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS))), directions, (byte) 20);
+        algorithm = new DFSAlgorithm(new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS))), directions, new Statistics(), (byte) 20);
 
     }
 
@@ -56,7 +57,7 @@ public class DFSTest {
     @Parameters(method = "getPuzzles")
     public void solvePuzzle(ArrayList<Byte> fileContents) throws Exception {
         PuzzleNode node = new PuzzleNode(fileContents);
-        algorithm = new DFSAlgorithm(node,directions, (byte) 20);
+        algorithm = new DFSAlgorithm(node,directions, new Statistics(), (byte) 20);
         assertThat(algorithm.solvePuzzle()).isEqualTo(EXPECTED_SOLUTION);
     }
 

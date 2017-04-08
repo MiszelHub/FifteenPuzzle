@@ -9,12 +9,9 @@ import java.util.*;
 
 public class BFSAlgorithm extends Algorithm{
 
-    Statistics statistics;
+    public BFSAlgorithm(PuzzleNode rootNode, Directions[] directions, Statistics statistics) {
+        super(rootNode,directions, statistics);
 
-
-    public BFSAlgorithm(PuzzleNode rootNode, Directions[] directions) {
-        super(rootNode,directions);
-        statistics = new Statistics();
     }
 
     @Override
@@ -44,11 +41,12 @@ public class BFSAlgorithm extends Algorithm{
             {
                 if(statistics.getMaxDepth() < statistics.calculateMaxDepth(neighbour))
                     statistics.setMaxDepth(statistics.calculateMaxDepth(neighbour));
-                System.out.println(neighbour.toString());
-                System.out.println();
+                //System.out.println(neighbour.toString());
+                //System.out.println();
                 if(!(visitedNodes.contains(neighbour) && nodesToProcess.contains(neighbour)))
                 {
                     nodesToProcess.add(neighbour);
+
                 }
 
             }
@@ -61,6 +59,7 @@ public class BFSAlgorithm extends Algorithm{
         System.out.println("Visited nodes: "+statistics.getVisitedNodes());
         System.out.println("Processed nodes: "+statistics.getProcessedNodes());
         System.out.println("Path Length: "+statistics.getSolutionLength());
+        System.out.println("Moves : " +statistics.getMoves());
         return solution;
     }
 

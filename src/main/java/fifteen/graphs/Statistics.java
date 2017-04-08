@@ -24,6 +24,7 @@ public class Statistics
     private Date afterSolving;
     private Stopwatch stopwatch;
     private int solutionLength;
+    private String moves="";
 
     public Statistics()
     {
@@ -76,10 +77,10 @@ public class Statistics
         while(node != null){
             length++;
             System.out.println(node.toString());
+            moves+=node.getMoves();
             node = node.getParent();
-
-
         }
+        moves = new StringBuffer(moves).reverse().toString();
         this.solutionLength = length;
     }
 
@@ -125,5 +126,13 @@ public class Statistics
 
     public int getSolutionLength() {
         return solutionLength;
+    }
+
+    public String getMoves() {
+        return moves;
+    }
+
+    public void setMoves(PuzzleNode node) {
+        this.moves += node.getMoves();
     }
 }

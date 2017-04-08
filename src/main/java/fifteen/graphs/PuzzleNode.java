@@ -14,6 +14,17 @@ public class PuzzleNode {
     private int totalHeuristicValue;
     private int currentHeuristicValue;
     private int previousHeuristicValue;
+    private String moves="";
+
+    public String getMoves() {
+        return moves;
+    }
+
+    public void setMoves(String moves) {
+        this.moves = moves;
+    }
+
+
 
 
 
@@ -141,7 +152,7 @@ public class PuzzleNode {
             node.position.column = (byte) (position.column + 1);
         }
         node.parent = this;
-
+        node.moves += direction.toString();
         return node;
     }
 

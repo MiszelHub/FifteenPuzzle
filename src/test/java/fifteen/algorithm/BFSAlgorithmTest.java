@@ -2,6 +2,7 @@ package fifteen.algorithm;
 
 import fifteen.graphs.Directions;
 import fifteen.graphs.PuzzleNode;
+import fifteen.graphs.Statistics;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ public class BFSAlgorithmTest {
 
     @Before
     public void setUp() throws Exception {
-        algorithm = new BFSAlgorithm(new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS))), directions);
+        algorithm = new BFSAlgorithm(new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS))), directions, new Statistics());
 
     }
 

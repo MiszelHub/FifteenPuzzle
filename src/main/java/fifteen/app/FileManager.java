@@ -6,4 +6,6 @@ import java.io.IOException;
 
 public interface FileManager<T> {
     T ReadFromFile(String wrongFileName) throws IOException;
+
+    void writeFile(String fileName, String destinationDirectory, String fileContents) throws FileNotFoundException;
 }

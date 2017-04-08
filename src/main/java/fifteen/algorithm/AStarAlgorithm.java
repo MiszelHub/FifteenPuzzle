@@ -14,15 +14,15 @@ public class AStarAlgorithm extends Algorithm
 {
 
     private Heuristic heuristic;
-    Statistics statistics;
 
-    public AStarAlgorithm(PuzzleNode rootNode, Directions [] directions,Heuristic heuristic)
+
+    public AStarAlgorithm(PuzzleNode rootNode, Directions [] directions,Statistics statistics,Heuristic heuristic)
     {
-        super(rootNode,directions);
+        super(rootNode,directions,statistics);
 
         this.heuristic = heuristic;
         heuristic.setExpectedSolution(expectedSolution);
-        statistics = new Statistics();
+
     }
 
     @Override
@@ -55,6 +55,7 @@ public class AStarAlgorithm extends Algorithm
                 System.out.println("Visited nodes: "+statistics.getVisitedNodes());
                 System.out.println("Processed nodes: "+statistics.getProcessedNodes());
                 System.out.println("Path Length: "+statistics.getSolutionLength());
+                statistics.setMoves(currentNode);
                 return currentNode;
             }
             visitedNodes.add(currentNode);

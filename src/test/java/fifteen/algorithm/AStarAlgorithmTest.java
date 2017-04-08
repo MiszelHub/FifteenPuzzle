@@ -2,6 +2,7 @@ package fifteen.algorithm;
 
 import fifteen.graphs.Directions;
 import fifteen.graphs.PuzzleNode;
+import fifteen.graphs.Statistics;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
@@ -25,25 +26,19 @@ public class AStarAlgorithmTest
     private AStarAlgorithm algorithm;
     private Directions[] directions = {Directions.Right, Directions.Down, Directions.Up, Directions.Left};
     private final static Byte [] FILE_CONTENTS = {4,4,1,2,3,4,5,10,6,8,9,0,7,12,13,14,11,15};
-    @Before
-    public void setUp()
-    {
-        algorithm = new AStarAlgorithm(new PuzzleNode(new ArrayList<Byte>(Arrays.asList(FILE_CONTENTS))), directions,new ManhatanHeuristic());
-
-    }
 
     @Test
     @Parameters(method = "getPuzzles")
     public void solvePuzzleManhatanMetric(ArrayList<Byte> fileContents) throws Exception {
         PuzzleNode node = new PuzzleNode(fileContents);
-        algorithm = new AStarAlgorithm(node, directions ,new ManhatanHeuristic());
+        algorithm = new AStarAlgorithm(node, directions, new Statistics(),new ManhatanHeuristic());
         assertThat(algorithm.solvePuzzle()).isEqualTo(EXPECTED_SOLUTION);
     }
     @Test
     @Parameters(method = "getPuzzles")
     public void solvePuzzleHammingMetric(ArrayList<Byte> fileContents) throws Exception {
         PuzzleNode node = new PuzzleNode(fileContents);
-        algorithm = new AStarAlgorithm(node, directions,new HammingHeuristic());
+        algorithm = new AStarAlgorithm(node, directions, new Statistics(),new HammingHeuristic());
         assertThat(algorithm.solvePuzzle()).isEqualTo(EXPECTED_SOLUTION);
     }
 

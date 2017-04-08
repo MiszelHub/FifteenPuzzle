@@ -13,13 +13,11 @@ import java.util.LinkedHashSet;
 public class DFSAlgorithm extends Algorithm
 {
     private byte maximumDepth;
-    Statistics statistics;
 
-    public DFSAlgorithm(PuzzleNode rootNode, Directions[] directions, byte maximumDepth)
+    public DFSAlgorithm(PuzzleNode rootNode, Directions[] directions, Statistics statistics, byte maximumDepth)
     {
-        super(rootNode,directions);
+        super(rootNode,directions, statistics);
         this.maximumDepth = maximumDepth;
-        statistics = new Statistics();
     }
 
 
