@@ -18,20 +18,22 @@ public class App
 {
 
     public static void main(String[] args ) throws IOException {
-        String filePath = "";
+        String puzzleFilePath = "";
         String algorithmName = "";
         String strategy = "";
+        String outputDirecory="";
         Algorithm algorithm = null;
         Statistics statistics = new Statistics();
         FileManager<ArrayList<Byte>> fileManager = new PuzzleFileManager();
-
+        Directions [] defaultDirectionsForAstar = {Directions.Right, Directions.Down, Directions.Up, Directions.Left};
 
 
         try
         {
-            filePath = args[0];
+            puzzleFilePath = args[0];
             algorithmName = args[1];
             strategy = args[2];
+            outputDirecory = args[3];
 
         }catch (Exception e)
         {
@@ -39,7 +41,7 @@ public class App
         }
         PuzzleNode initialState = null;
         try{
-            initialState = new PuzzleNode(fileManager.ReadFromFile(filePath));
+            initialState = new PuzzleNode(fileManager.ReadFromFile(puzzleFilePath));
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
@@ -52,13 +54,13 @@ public class App
                 algorithm = new DFSAlgorithm(initialState, parseDirections(strategy), statistics, (byte)20);
                 break;
             case "astr":
-                if(strategy == "manh")
+                if(strategy.equals("manh"))
                 {
-                    algorithm = new AStarAlgorithm(initialState, parseDirections(strategy), statistics, new ManhatanHeuristic());
+                    algorithm = new AStarAlgorithm(initialState, defaultDirectionsForAstar, statistics, new ManhatanHeuristic());
                 }
-                else if(strategy == "hamm")
+                else if(strategy.equals("hamm"))
                 {
-                    algorithm = new AStarAlgorithm(initialState, parseDirections(strategy), statistics, new HammingHeuristic());
+                    algorithm = new AStarAlgorithm(initialState, defaultDirectionsForAstar, statistics, new HammingHeuristic());
                 }
                 break;
         }
@@ -77,22 +79,21 @@ public class App
 
 
 
-        String statisticsFileName = fileNameBuilder(filePath,"stats");
-        String solutionFileName = fileNameBuilder(filePath,"sol");
+        String statisticsFileName = fileNameBuilder(puzzleFilePath,"stats");
+        String solutionFileName = fileNameBuilder(puzzleFilePath,"sol");
 
-        System.out.println( "FilePath : "+filePath);
+        System.out.println( "FilePath : "+puzzleFilePath);
         System.out.println( "StatisticsFileName : "+statisticsFileName);
         System.out.println( "Algorithm Name : "+algorithmName);
         System.out.println( "Strategy/Heuristic : "+strategy);
 
 
         try{
-            fileManager.writeFile(statisticsFileName, statisticsFileBuilder.toString());
-            fileManager.writeFile(solutionFileName,solutionFileBuilder.toString());
+            fileManager.writeFile(outputDirecory+statisticsFileName, statisticsFileBuilder.toString());
+            fileManager.writeFile(outputDirecory+solutionFileName,solutionFileBuilder.toString());
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
-    System.in.read();
     }
 
     public static Directions[] parseDirections(String strategy)

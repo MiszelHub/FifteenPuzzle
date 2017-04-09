@@ -29,8 +29,8 @@ public class PuzzleFileManager implements FileManager<ArrayList<Byte>> {
     }
 
     @Override
-    public void writeFile(String fileName, String fileContents) throws FileNotFoundException {
-        PrintWriter fileWriter = new PrintWriter(fileName);
+    public void writeFile(String filePath, String fileContents) throws FileNotFoundException {
+        PrintWriter fileWriter = new PrintWriter(filePath);
         try{
             fileWriter.print(fileContents);
         }finally {
