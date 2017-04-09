@@ -89,8 +89,8 @@ public class App
 
 
         try{
-            fileManager.writeFile(outputDirecory+statisticsFileName, statisticsFileBuilder.toString());
-            fileManager.writeFile(outputDirecory+solutionFileName,solutionFileBuilder.toString());
+            fileManager.writeFile(outputDirecory+algorithmName+"\\"+strategy+"\\"+statisticsFileName, statisticsFileBuilder.toString());
+            fileManager.writeFile(outputDirecory+algorithmName+"\\"+strategy+"\\"+solutionFileName,solutionFileBuilder.toString());
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
