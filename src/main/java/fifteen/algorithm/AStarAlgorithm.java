@@ -67,6 +67,12 @@ public class AStarAlgorithm extends Algorithm
                     int distance = currentNode.getPreviousHeuristicValue()+1;
                     if(!nodesToProcess.contains(neighbour) || distance < nodeMap.get(neighbour).getPreviousHeuristicValue())
                     {
+                        if(neighbour.equals(expectedSolution))
+                        {
+                            statistics.stopSolvingTime();
+                            statistics.calculatePathLength(neighbour);
+                            return neighbour;
+                        }
                         neighbour.setPreviousHeuristicValue(distance);
                         neighbour.setCurrentHeuristicValue(heuristic.getHeuristicsValue(neighbour));
                         neighbour.SumDistance();

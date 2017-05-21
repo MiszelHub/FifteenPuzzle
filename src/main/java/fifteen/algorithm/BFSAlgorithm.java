@@ -43,6 +43,12 @@ public class BFSAlgorithm extends Algorithm{
                     statistics.setMaxDepth(statistics.calculateMaxDepth(neighbour));
                 //System.out.println(neighbour.toString());
                 //System.out.println();
+                if(neighbour.equals(expectedSolution))
+                {
+                    statistics.stopSolvingTime();
+                    statistics.calculatePathLength(neighbour);
+                    return neighbour;
+                }
                 if(!(visitedNodes.contains(neighbour) && nodesToProcess.contains(neighbour)))
                 {
                     nodesToProcess.add(neighbour);

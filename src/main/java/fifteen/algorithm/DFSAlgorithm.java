@@ -45,6 +45,7 @@ public class DFSAlgorithm extends Algorithm
 
             if (currentNode.equals(expectedSolution)) {
                 statistics.stopSolvingTime();
+                System.out.println(statistics.getMaxDepth());
                 return currentNode;
             }
 
@@ -64,6 +65,8 @@ public class DFSAlgorithm extends Algorithm
 
                 if (neighbour.equals(expectedSolution)) {
                     statistics.stopSolvingTime();
+                    statistics.calculatePathLength(neighbour);
+                    System.out.println(statistics.getMaxDepth());
                     return neighbour;
                 } else if (!visitedNodes.contains(neighbour) && !nodesToProcess.contains(neighbour)) {
                     nodesToProcess.add(neighbour);
@@ -75,6 +78,7 @@ public class DFSAlgorithm extends Algorithm
         }
 
         statistics.stopSolvingTime();
+        System.out.println(statistics.getMaxDepth());
         return solution;
     }
 

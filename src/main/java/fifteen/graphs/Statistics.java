@@ -74,7 +74,7 @@ public class Statistics
         int length =0;
 
 
-        while(node != null){
+        while(node.getParent() != null){
             length++;
             System.out.println(node.toString());
             moves+=node.getMoves();
